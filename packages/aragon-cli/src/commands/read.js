@@ -1,14 +1,18 @@
 const fs = require('fs')
-const { ensureWeb3 } = require('../../helpers/web3-fallback')
+const { ensureWeb3 } = require('../helpers/web3-fallback')
 
-exports.command = 'call <contractArtifacts> <functionName> [functionArgs..]'
+exports.command =
+  'read <contractArtifacts> <contractAddress> <functionName> [functionArgs..]'
 
-exports.describe = 'Encode a call to a function of a contract'
+exports.describe = 'Perform a non state changing call to a contract'
 
 exports.builder = yargs => {
   return yargs
     .positional('contractArtifacts', {
       describe: 'Path to the JSON contract artifacts containing its ABI',
+    })
+    .positional('contractAddress', {
+      describe: 'Deployed contract address',
     })
     .positional('functionName', {
       describe: 'Name of the function to call',
@@ -23,6 +27,7 @@ exports.builder = yargs => {
 exports.handler = async function({
   network,
   contractArtifacts,
+  contractAddress,
   functionName,
   functionArgs,
 }) {
@@ -31,9 +36,9 @@ exports.handler = async function({
   const file = fs.readFileSync(contractArtifacts, 'utf8')
   const artifacts = JSON.parse(file)
 
-  const Contract = new web3.eth.Contract(artifacts.abi)
+  const contract = new web3.eth.Contract(artifacts.abi, contractAddress)
 
-  const call = Contract.methods[functionName](...functionArgs).encodeABI()
+  const call = await contract.methods[functionName](...functionArgs).call()
   console.log(call)
 
   process.exit(0)
