@@ -893,6 +893,11 @@
         "uuid": "^3.2.1"
       }
     },
+    "@aragon/test-helpers": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/@aragon/test-helpers/-/test-helpers-2.1.0.tgz",
+      "integrity": "sha512-lL0seKOPBr0BDt5EiXQhevdXCtkJbv/ZFoJFLWmhlcdd8TKsWffj+c/hzYXP9l9OjCqPbO61JsDBPS0ZDF7ERA=="
+    },
     "@aragon/truffle-config-v4": {
       "version": "1.0.0",
       "resolved": "https://registry.npmjs.org/@aragon/truffle-config-v4/-/truffle-config-v4-1.0.0.tgz",

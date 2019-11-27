@@ -1,7 +1,7 @@
 const fs = require('fs')
 const { ensureWeb3 } = require('../../helpers/web3-fallback')
 
-exports.command = 'call [contractArtifacts] [functionName] [functionArgs..]'
+exports.command = 'call <contractArtifacts> <functionName> <functionArgs..>'
 
 exports.describe = 'Encode a call to a function of a contract'
 
